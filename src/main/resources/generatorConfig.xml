@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+          PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+          "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="D:\opt\M2\repository\com\oracle\ojdbc6\11.2.0.3\ojdbc6-11.2.0.3.jar" />
+	<context id="my" targetRuntime="MyBatis3">
+		<commentGenerator>
+			<property name="suppressDate" value="false" />
+			<property name="suppressAllComments" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:orcl2" userId="mybatis_test"
+			password="Hsy804190" />
+		<javaTypeResolver>
+			<!-- 是否使用bigDecimal， false可自动转化以下类型（Long, Integer, Short, etc.） -->
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<javaModelGenerator targetPackage="com.alimy.sbmb.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<javaClientGenerator targetPackage="com.alimy.sbmb.dao"
+			targetProject="src/main/java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!--<table tableName="T_FEE_AGTBILL" domainObjectName="FeeAgentBill" 36 
+			enableCountByExample="false" enableUpdateByExample="false" 37 enableDeleteByExample="false" 
+			enableSelectByExample="false" 38 selectByExampleQueryId="false"/> -->
+        <!--
+		<table tableName="TEACHER" domainObjectName="Teacher"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		<table tableName="STUDENT" domainObjectName="Student"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+        -->
+        <table tableName="Tes" domainObjectName="Tes"
+            enableCountByExample="false" enableUpdateByExample="false"
+            enableDeleteByExample="false" enableSelectByExample="false"
+            selectByExampleQueryId="false">
+        </table>
+		
+
+		<!-- <table tableName="USERTAB" domainObjectName="Usertab" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"> </table> <table tableName="ORDERTAB" domainObjectName="Ordertab" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false"> </table> <table 
+			tableName="ORDERDETAIL" domainObjectName="OrderDetail" enableCountByExample="false" 
+			enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" 
+			selectByExampleQueryId="false"> </table> <table tableName="ITEM" domainObjectName="Item" 
+			enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" 
+			enableSelectByExample="false" selectByExampleQueryId="false"> </table> -->
+	</context>
+</generatorConfiguration>

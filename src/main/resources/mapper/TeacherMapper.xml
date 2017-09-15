@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.alimy.sbmb.dao.TeacherMapper">
+	<resultMap id="BaseResultMap" type="com.alimy.sbmb.entity.Teacher">
+		<id column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR" />
+		<result column="TEACHER_NAME" property="teacherName" jdbcType="VARCHAR" />
+		<result column="TEACHER_AGE" property="teacherAge" jdbcType="DECIMAL" />
+	</resultMap>
+
+	<resultMap type="com.alimy.sbmb.entity.Teacher" id="TeacherAndStudent">
+
+		<id column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR" />
+		<result column="TEACHER_NAME" property="teacherName" jdbcType="VARCHAR" />
+		<result column="TEACHER_AGE" property="teacherAge" jdbcType="DECIMAL" />
+
+		<collection property="studentList" ofType="com.alimy.sbmb.entity.Student">
+			<id column="STUDENT_ID" property="studentId" jdbcType="VARCHAR" />
+			<result column="TEACHER_ID" property="teacherId" jdbcType="VARCHAR" />
+			<result column="STUDENT_NAME" property="studentName" jdbcType="VARCHAR" />
+		</collection>
+
+	</resultMap>
+	
+	
+	<select id="listTeaAndStu" resultMap="TeacherAndStudent">
+	   
+	   select T.TEACHER_ID, T.TEACHER_NAME, T.TEACHER_AGE, S.STUDENT_ID, S.STUDENT_NAME 
+	   from TEACHER T, STUDENT S
+	   where S.TEACHER_ID = T.TEACHER_ID order by T.TEACHER_ID 
+	   
+	</select>
+
+
+	<sql id="Base_Column_List">
+		TEACHER_ID, TEACHER_NAME, TEACHER_AGE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from TEACHER
+		where TEACHER_ID = #{teacherId,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from TEACHER
+		where TEACHER_ID = #{teacherId,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.alimy.sbmb.entity.Teacher">
+		insert into TEACHER (TEACHER_ID, TEACHER_NAME, TEACHER_AGE
+		)
+		values (#{teacherId,jdbcType=VARCHAR}, #{teacherName,jdbcType=VARCHAR},
+		#{teacherAge,jdbcType=DECIMAL}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.alimy.sbmb.entity.Teacher">
+		insert into TEACHER
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="teacherId != null">
+				TEACHER_ID,
+			</if>
+			<if test="teacherName != null">
+				TEACHER_NAME,
+			</if>
+			<if test="teacherAge != null">
+				TEACHER_AGE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="teacherId != null">
+				#{teacherId,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherName != null">
+				#{teacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherAge != null">
+				#{teacherAge,jdbcType=DECIMAL},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.alimy.sbmb.entity.Teacher">
+		update TEACHER
+		<set>
+			<if test="teacherName != null">
+				TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+			</if>
+			<if test="teacherAge != null">
+				TEACHER_AGE = #{teacherAge,jdbcType=DECIMAL},
+			</if>
+		</set>
+		where TEACHER_ID = #{teacherId,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.alimy.sbmb.entity.Teacher">
+		update TEACHER
+		set TEACHER_NAME = #{teacherName,jdbcType=VARCHAR},
+		TEACHER_AGE = #{teacherAge,jdbcType=DECIMAL}
+		where TEACHER_ID = #{teacherId,jdbcType=VARCHAR}
+	</update>
+</mapper>

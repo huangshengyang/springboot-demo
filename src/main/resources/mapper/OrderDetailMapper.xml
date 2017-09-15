@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.alimy.sbmb.dao.OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.alimy.sbmb.entity.OrderDetail">
+    <id column="ORDERDETAIL_ID" jdbcType="VARCHAR" property="orderdetailId" />
+    <result column="ORDER_ID" jdbcType="VARCHAR" property="orderId" />
+    <result column="ITEM_ID" jdbcType="VARCHAR" property="itemId" />
+    <result column="ITEM_NUM" jdbcType="DECIMAL" property="itemNum" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ORDERDETAIL_ID, ORDER_ID, ITEM_ID, ITEM_NUM
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ORDERDETAIL
+    where ORDERDETAIL_ID = #{orderdetailId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from ORDERDETAIL
+    where ORDERDETAIL_ID = #{orderdetailId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.alimy.sbmb.entity.OrderDetail">
+    insert into ORDERDETAIL (ORDERDETAIL_ID, ORDER_ID, ITEM_ID, 
+      ITEM_NUM)
+    values (#{orderdetailId,jdbcType=VARCHAR}, #{orderId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+      #{itemNum,jdbcType=DECIMAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.alimy.sbmb.entity.OrderDetail">
+    insert into ORDERDETAIL
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="orderdetailId != null">
+        ORDERDETAIL_ID,
+      </if>
+      <if test="orderId != null">
+        ORDER_ID,
+      </if>
+      <if test="itemId != null">
+        ITEM_ID,
+      </if>
+      <if test="itemNum != null">
+        ITEM_NUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="orderdetailId != null">
+        #{orderdetailId,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null">
+        #{itemNum,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.alimy.sbmb.entity.OrderDetail">
+    update ORDERDETAIL
+    <set>
+      <if test="orderId != null">
+        ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null">
+        ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNum != null">
+        ITEM_NUM = #{itemNum,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where ORDERDETAIL_ID = #{orderdetailId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.alimy.sbmb.entity.OrderDetail">
+    update ORDERDETAIL
+    set ORDER_ID = #{orderId,jdbcType=VARCHAR},
+      ITEM_ID = #{itemId,jdbcType=VARCHAR},
+      ITEM_NUM = #{itemNum,jdbcType=DECIMAL}
+    where ORDERDETAIL_ID = #{orderdetailId,jdbcType=VARCHAR}
+  </update>
+</mapper>
